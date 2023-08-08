@@ -1,0 +1,1 @@
+export 'shared/movie_appbar.dart';
