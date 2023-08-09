@@ -5,7 +5,7 @@ class Environment {
 
   // The MovieDB constants
   static const String theMovieDbBaseUrl = 'https://api.themoviedb.org/3';
-  static const String theMovieDbImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+  static const String theMovieDbImageBaseUrl = 'https://image.tmdb.org/t/p';
 
   static String theMovieDbApiKey = dotenv.env[_theMovieDbApiKeyName] ?? 'No api key found';
 
