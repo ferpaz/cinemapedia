@@ -12,9 +12,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: _HomeView(),
-    ));
+      body: _HomeView(),
+      bottomNavigationBar: MovieBottomNavigationBar(),
+    );
   }
 }
 
