@@ -35,7 +35,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    //final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideShowProvider);
 
     if (slideShowMovies.isEmpty) {
@@ -50,19 +50,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
           MovieSlideShow(movies: slideShowMovies),
 
-          // Expanded(
-          //   child: ListView.builder(
-          //     itemCount: nowPlayingMovies.length,
-          //     itemBuilder: (context, index) {
-          //       final movie = nowPlayingMovies[index];
-
-          //       return ListTile(
-          //         title: Text(movie.title),
-          //         subtitle: Text(movie.overview),
-          //       );
-          //     },
-          //   ),
-          // ),
+          MovieHorizontalListView(
+            movies: nowPlayingMovies,
+            title: 'En cines',
+            subtitle: 'lunes 20',
+          ),
         ]
       );
   }

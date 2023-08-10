@@ -35,28 +35,6 @@ class MovieSlideShow extends StatelessWidget {
             activeSize: 12,
           ),
         ),
-        // layout: SwiperLayout.STACK,
-        // itemBuilder: (_, int index) {
-        //   final movie = movies[index];
-
-        //   movie.heroId = 'swiper-${movie.id}';
-
-        //   return GestureDetector(
-        //     onTap: () => Navigator.pushNamed(context, 'details-screen', arguments: movie),
-        //     child: Hero(
-        //       tag: movie.heroId!,
-        //       child: ClipRRect(
-        //         borderRadius: BorderRadius.circular(20),
-        //         child: FadeInImage(
-        //           placeholder: AssetImage('assets/images/no-image.jpg'),
-        //           image: NetworkImage(movie.fullPosterImg),
-        //           fit: BoxFit.cover,
-        //         ),
-        //       ),
-        //     ),
-        //   );
-        // },
-
       )
     );
   }
@@ -71,7 +49,6 @@ class _Slide extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final colors = Theme.of(context).colorScheme;
-    //final styles = Theme.of(context).textTheme;
 
     final decoration = BoxDecoration(
       borderRadius: BorderRadius.circular(20),
@@ -101,20 +78,7 @@ class _Slide extends StatelessWidget {
               ),
           ),
         ),
-
-        // Container(
-        //   alignment: Alignment.bottomCenter,
-        //   //padding: const EdgeInsets.only(bottom: 10, left: 16, right: 16),
-        //   child: Text(
-        //     movie.title,
-        //     style: styles.titleMedium!.copyWith(fontWeight: FontWeight.bold),
-        //     textAlign: TextAlign.center,
-        //     maxLines: 2,
-        //     overflow: TextOverflow.ellipsis,
-        //   ),
-        // ),
-
-        ),
-      );
+      ),
+    );
   }
 }
