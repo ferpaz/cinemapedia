@@ -14,7 +14,15 @@ class TheMovieDbDataSources extends MovieDatasourceBase {
       queryParameters: {
         'api_key': Environment.theMovieDbApiKey,
         'language': 'es-US',
-      }
+      },
+      validateStatus: (status) {
+        if (status == null)
+          return false;
+        else if (status == 422)
+          return true;
+        else
+          return status >= 200 && status < 300;
+      },
     )
   );
 
@@ -26,9 +34,13 @@ class TheMovieDbDataSources extends MovieDatasourceBase {
         'page': page,
       });
 
-    return MovieDbResponse.fromJson(response.data).results
-      .where((m) => m.posterPath != '')    // esto no sirve porque siempre regresa algo pero para demostrar las lambdas
-      .map((m) => MovieMapper.movieFromMovieDbToEntity(m))
-      .toList();
+    if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
+      return MovieDbResponse.fromJson(response.data).results
+        .where((m) => m.posterPath != '')    // esto no sirve porque siempre regresa algo pero para demostrar las lambdas
+        .map((m) => MovieMapper.movieFromMovieDbToEntity(m))
+        .toList();
+    }
+
+    return [];
   }
 }

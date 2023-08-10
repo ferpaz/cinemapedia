@@ -5,9 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cinemapedia/config/di/get_it.dart';
 import 'package:cinemapedia/config/router/app_router.dart';
 import 'package:cinemapedia/config/theme/app_theme.dart';
+import 'package:intl/intl.dart';
 
 
 Future<void> main() async {
+
+  Intl.defaultLocale = 'es_US';
 
   // Load .env file
   await dotenv.load(fileName: ".env");
