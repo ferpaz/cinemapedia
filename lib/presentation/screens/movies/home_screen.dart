@@ -32,7 +32,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   void initState() {
     super.initState();
 
+    // Inicializa los proveedores de películas de las diferentes categorías
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+    ref.read(popularMoviesProvider.notifier).loadNextPage();
+    ref.read(upcomingMoviesProvider.notifier).loadNextPage();
+    ref.read(topRatedMoviesProvider.notifier).loadNextPage();
   }
 
   @override
@@ -41,8 +45,14 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
     final colors = Theme.of(context).colorScheme;
 
-    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    // Inicializa la lista de películas en el Slide Show de Peliculas
     final slideShowMovies = ref.watch(moviesSlideShowProvider);
+
+    // Inicializa la lista de películas en la diferentes categorías
+    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final popularMovies = ref.watch(popularMoviesProvider);
+    final upcomingMovies = ref.watch(upcomingMoviesProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesProvider);
 
     if (slideShowMovies.isEmpty) {
       return const Center(
@@ -78,16 +88,23 @@ class _HomeViewState extends ConsumerState<_HomeView> {
               ),
 
               MovieHorizontalListView(
-                movies: nowPlayingMovies,
+                movies: popularMovies,
                 title: 'Populares',
-                loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
               ),
+
               MovieHorizontalListView(
-                movies: nowPlayingMovies,
-                title: 'Mejor calificados',
-                subtitle: 'En este mes',
-                loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                movies: topRatedMovies,
+                title: 'Mejor calificadas',
+                loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
               ),
+
+              MovieHorizontalListView(
+                movies: upcomingMovies,
+                title: 'Próximamente en cines',
+                loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
+              ),
+
               const SizedBox(height: 10),
             ]);
           },

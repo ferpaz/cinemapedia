@@ -27,9 +27,25 @@ class TheMovieDbDataSources extends MovieDatasourceBase {
   );
 
   @override
-  Future<List<Movie>> getNowPlayingMovies({int page = 1}) async {
+  Future<List<Movie>> getNowPlayingMovies({int page = 1}) async
+    => await _getMoviesImpl(page, '/movie/now_playing');
+
+  @override
+  Future<List<Movie>> getPopularMovies({int page = 1})
+    => _getMoviesImpl(page, '/movie/popular');
+
+  @override
+  Future<List<Movie>> getTopRatedMovies({int page = 1})
+    => _getMoviesImpl(page, '/movie/top_rated');
+
+  @override
+  Future<List<Movie>> getUpcomingMovies({int page = 1})
+    => _getMoviesImpl(page, '/movie/upcoming');
+
+
+  Future<List<Movie>> _getMoviesImpl(int page, String url) async {
     final response = await dio.get(
-      '/movie/now_playing',
+      url,
       queryParameters: {
         'page': page,
       });

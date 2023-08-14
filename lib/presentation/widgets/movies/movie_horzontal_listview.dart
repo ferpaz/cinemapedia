@@ -113,10 +113,7 @@ class _Slide extends StatelessWidget {
                   width: 150,
                   loadingBuilder: (context, child, loadingProgress) => loadingProgress == null
                     ? FadeIn(child: child)
-                    : DecoratedBox(
-                          decoration: decoration,
-                          child: Center(child: CircularProgressIndicator(color: colors.primary, backgroundColor: colors.background,))
-                      ),
+                    : SizedBox(height: 225, child: Center(child: CircularProgressIndicator(color: colors.primary, backgroundColor: colors.background,))),
                 ),
               ),
             )
