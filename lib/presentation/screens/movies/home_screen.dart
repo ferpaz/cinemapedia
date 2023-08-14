@@ -87,6 +87,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                 ),
 
                 MovieHorizontalListView(
+                  movies: upcomingMovies,
+                  title: 'Próximamente en cines',
+                  loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
+                ),
+
+                MovieHorizontalListView(
                   movies: popularMovies,
                   title: 'Populares',
                   loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
@@ -96,12 +102,6 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                   movies: topRatedMovies,
                   title: 'Mejor calificadas',
                   loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
-                ),
-
-                MovieHorizontalListView(
-                  movies: upcomingMovies,
-                  title: 'Próximamente en cines',
-                  loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
                 ),
 
                 const SizedBox(height: 10),
