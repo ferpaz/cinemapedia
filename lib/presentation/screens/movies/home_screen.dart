@@ -1,3 +1,4 @@
+import 'package:cinemapedia/presentation/providers/movies/initial_loading_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -43,6 +44,9 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   Widget build(BuildContext context) {
     initializeDateFormatting('es-US', null);
 
+    final initialLoading = ref.watch(initialLoadingProvider);
+    if (initialLoading) return const FullScreenLoader();
+
     final colors = Theme.of(context).colorScheme;
 
     // Inicializa la lista de películas en el Slide Show de Peliculas
@@ -54,63 +58,59 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final upcomingMovies = ref.watch(upcomingMoviesProvider);
     final topRatedMovies = ref.watch(topRatedMoviesProvider);
 
-    if (slideShowMovies.isEmpty) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          floating: true,
+          leading: Icon(Icons.movie_outlined, color: colors.primary),
+          title: Text('Cinemapedia'),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.search, color: colors.primary),
+            ),
+          ],
 
-    return CustomScrollView(slivers: [
-      SliverAppBar(
-        floating: true,
-        leading: Icon(Icons.movie_outlined, color: colors.primary),
-        title: Text('Cinemapedia'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search, color: colors.primary),
-          ),
-        ],
-
-      ),
-
-      SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) {
-            return Column(children: [
-              MovieSlideShow(movies: slideShowMovies),
-
-              MovieHorizontalListView(
-                movies: nowPlayingMovies,
-                title: 'En cines',
-                subtitle: '${DateFormat('EEEEE', 'es-US').format(DateTime.now())} ${DateTime.now().day}',
-                loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
-              ),
-
-              MovieHorizontalListView(
-                movies: popularMovies,
-                title: 'Populares',
-                loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
-              ),
-
-              MovieHorizontalListView(
-                movies: topRatedMovies,
-                title: 'Mejor calificadas',
-                loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
-              ),
-
-              MovieHorizontalListView(
-                movies: upcomingMovies,
-                title: 'Próximamente en cines',
-                loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
-              ),
-
-              const SizedBox(height: 10),
-            ]);
-          },
-          childCount: 1,
         ),
-      ),
-    ]);
+
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return Column(children: [
+                MovieSlideShow(movies: slideShowMovies),
+
+                MovieHorizontalListView(
+                  movies: nowPlayingMovies,
+                  title: 'En cartelera',
+                  subtitle: '${DateFormat('EEEEE', 'es-US').format(DateTime.now())} ${DateTime.now().day}',
+                  loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                ),
+
+                MovieHorizontalListView(
+                  movies: popularMovies,
+                  title: 'Populares',
+                  loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
+                ),
+
+                MovieHorizontalListView(
+                  movies: topRatedMovies,
+                  title: 'Mejor calificadas',
+                  loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
+                ),
+
+                MovieHorizontalListView(
+                  movies: upcomingMovies,
+                  title: 'Próximamente en cines',
+                  loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
+                ),
+
+                const SizedBox(height: 10),
+              ]);
+            },
+            childCount: 1,
+          ),
+        ),
+      ],
+    );
   }
 }
