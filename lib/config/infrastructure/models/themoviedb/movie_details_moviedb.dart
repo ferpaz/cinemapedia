@@ -14,7 +14,7 @@ class MovieDetailsFromMovieDb {
     String posterPath;
     List<ProductionCompany> productionCompanies;
     List<ProductionCountry> productionCountries;
-    DateTime releaseDate;
+    DateTime? releaseDate;
     int revenue;
     int runtime;
     List<SpokenLanguage> spokenLanguages;
@@ -97,7 +97,7 @@ class MovieDetailsFromMovieDb {
         "poster_path": posterPath,
         "production_companies": List<dynamic>.from(productionCompanies.map((x) => x.toJson())),
         "production_countries": List<dynamic>.from(productionCountries.map((x) => x.toJson())),
-        "release_date": "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
+        "release_date": releaseDate == null ? null : "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}",
         "revenue": revenue,
         "runtime": runtime,
         "spoken_languages": List<dynamic>.from(spokenLanguages.map((x) => x.toJson())),

@@ -177,12 +177,13 @@ class _MovieOverview extends StatelessWidget {
                         ],
                       ),
 
-                      Row(
-                        children: [
-                          const SizedBox(width: 5),
-                          Text('Est. ${HumanFormats.formatDate(movie.releaseDate)}', style: styles.bodySmall?.copyWith(color: colors.tertiary)),
-                        ],
-                      ),
+                      if (movie.releaseDate != null)
+                        Row(
+                          children: [
+                            const SizedBox(width: 5),
+                            Text('Est. ${HumanFormats.formatDate(movie.releaseDate!)}', style: styles.bodySmall?.copyWith(color: colors.tertiary)),
+                          ],
+                        ),
 
                       // Row(
                       //   children: [
