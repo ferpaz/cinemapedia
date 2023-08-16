@@ -1,11 +1,10 @@
-import 'package:cinemapedia/config/infrastructure/models/themoviedb/movie_details_moviedb.dart';
+import 'package:cinemapedia/config/infrastructure/models/moviedb_models.dart';
 import 'package:dio/dio.dart';
 
 import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:cinemapedia/config/domain/datasources/movie_datasource_base.dart';
 import 'package:cinemapedia/config/domain/entities/movie.dart';
 import 'package:cinemapedia/config/infrastructure/mappers/movie_mapper.dart';
-import 'package:cinemapedia/config/infrastructure/models/themoviedb/the_moviedb_response.dart';
 
 class TheMovieDbDataSources extends MovieDatasourceBase {
 
