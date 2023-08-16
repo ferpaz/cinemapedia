@@ -44,7 +44,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   Widget build(BuildContext context) {
     initializeDateFormatting('es-US', null);
 
-    final initialLoading = ref.watch(initialLoadingProvider);
+    final initialLoading = ref.watch(initialHomeScreenLoadingProvider);
     if (initialLoading) return const FullScreenLoader();
 
     final colors = Theme.of(context).colorScheme;

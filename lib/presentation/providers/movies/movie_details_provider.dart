@@ -27,3 +27,4 @@ class MovieDetailsNotifier extends StateNotifier<Map<String, Movie>> {
     state = { ...state, movieId: movie };
   }
 }
+
