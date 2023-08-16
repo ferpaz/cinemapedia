@@ -8,18 +8,17 @@ class MovieRepository extends MovieRepositoryBase {
   MovieRepository(this.movieDataSource);
 
   @override
-  Future<List<Movie>> getNowPlayingMovies({int page = 1})
-    => movieDataSource.getNowPlayingMovies(page: page);
+  Future<List<Movie>> getNowPlayingMovies({int page = 1}) => movieDataSource.getNowPlayingMovies(page: page);
 
   @override
-  Future<List<Movie>> getPopularMovies({int page = 1})
-    => movieDataSource.getPopularMovies(page: page);
+  Future<List<Movie>> getPopularMovies({int page = 1}) => movieDataSource.getPopularMovies(page: page);
 
-      @override
-  Future<List<Movie>> getTopRatedMovies({int page = 1})
-    => movieDataSource.getTopRatedMovies(page: page);
+  @override
+  Future<List<Movie>> getTopRatedMovies({int page = 1}) => movieDataSource.getTopRatedMovies(page: page);
 
-      @override
-  Future<List<Movie>> getUpcomingMovies({int page = 1})
-    => movieDataSource.getUpcomingMovies(page: page);
+  @override
+  Future<List<Movie>> getUpcomingMovies({int page = 1}) => movieDataSource.getUpcomingMovies(page: page);
+
+  @override
+  Future<Movie> getMovieDetailsById(String movieId) => movieDataSource.getMovieDetailsById(movieId);
 }

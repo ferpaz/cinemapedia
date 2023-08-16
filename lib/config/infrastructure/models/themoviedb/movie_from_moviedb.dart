@@ -19,7 +19,7 @@ class MovieFromMovieDb {
     final bool adult;
     final String backdropPath;
     final List<int> genreIds;
-    final int id;
+    final String id;
     final String originalLanguage;
     final String originalTitle;
     final String overview;
@@ -35,7 +35,7 @@ class MovieFromMovieDb {
         adult: json["adult"] ?? false,
         backdropPath: json["backdrop_path"] ?? '',
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
-        id: json["id"],
+        id: json["id"].toString(),
         originalLanguage: json["original_language"],
         originalTitle: json["original_title"],
         overview: json["overview"] ?? '',
