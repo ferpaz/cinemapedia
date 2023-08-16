@@ -3,6 +3,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 
 import 'package:cinemapedia/config/domain/entities/movie.dart';
+import 'package:go_router/go_router.dart';
 
 class MovieSlideShow extends StatelessWidget {
 
@@ -71,7 +72,10 @@ class _Slide extends StatelessWidget {
             movie.backdropPath,
             fit: BoxFit.cover,
             loadingBuilder: (context, child, loadingProgress) => loadingProgress == null
-              ? FadeIn(child: child)
+              ? GestureDetector(
+                  child: FadeIn(child: child),
+                  onTap: () => context.push('/movie/${movie.id}')
+                )
               : DecoratedBox(
                   decoration: decoration,
                   child: Center(child: CircularProgressIndicator(color: colors.primary, backgroundColor: colors.background,))

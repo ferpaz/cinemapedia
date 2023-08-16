@@ -3,6 +3,7 @@ import 'package:cinemapedia/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cinemapedia/config/domain/entities/movie.dart';
+import 'package:go_router/go_router.dart';
 
 class MovieHorizontalListView extends StatefulWidget {
   final List<Movie> movies;
@@ -112,7 +113,10 @@ class _Slide extends StatelessWidget {
                   fit: BoxFit.cover,
                   width: 150,
                   loadingBuilder: (context, child, loadingProgress) => loadingProgress == null
-                    ? FadeIn(child: child)
+                    ? GestureDetector(
+                        child: FadeIn(child: child),
+                        onTap: () => context.push('/movie/${movie.id}')
+                      )
                     : SizedBox(height: 225, child: Center(child: CircularProgressIndicator(color: colors.primary, backgroundColor: colors.background,))),
                 ),
               ),
@@ -123,11 +127,14 @@ class _Slide extends StatelessWidget {
 
           SizedBox(
             width: 150,
-            child: Text(
-              movie.title,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: styles.titleSmall,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Text(
+                movie.title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: styles.titleSmall,
+              ),
             ),
           ),
 
@@ -137,11 +144,15 @@ class _Slide extends StatelessWidget {
             width: 150,
             child: Row(
               children: [
+                const SizedBox(width: 5),
                 Icon(Icons.star_half_outlined, size: 15, color: colors.tertiary),
                 const SizedBox(width: 3),
-                Text('${movie.voteAverage}',style: styles.bodyMedium?.copyWith(color: colors.tertiary)),
+                Text('${HumanFormats.formatNumber(movie.voteAverage)}',style: styles.bodyMedium?.copyWith(color: colors.tertiary)),
                 const Spacer(),
-                Text('${HumanFormats.formatNumber(movie.popularity)}', style: styles.bodySmall?.copyWith(color: colors.tertiary)),
+                Icon(Icons.favorite_outline, size: 15, color: colors.tertiary),
+                const SizedBox(width: 3),
+                Text('${HumanFormats.formatCompactNumber(movie.popularity)}', style: styles.bodySmall?.copyWith(color: colors.tertiary)),
+                const SizedBox(width: 5),
               ],
             ),
           ),
