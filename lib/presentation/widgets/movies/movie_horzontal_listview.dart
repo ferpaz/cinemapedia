@@ -145,11 +145,11 @@ class _Slide extends StatelessWidget {
             child: Row(
               children: [
                 const SizedBox(width: 5),
-                Icon(Icons.star_half_outlined, size: 15, color: colors.tertiary),
+                Icon(Icons.star_half_outlined, size: 15, color: Colors.amber.shade600),
                 const SizedBox(width: 3),
                 Text('${HumanFormats.formatNumber(movie.voteAverage)}',style: styles.bodyMedium?.copyWith(color: colors.tertiary)),
                 const Spacer(),
-                Icon(Icons.favorite_outline, size: 15, color: colors.tertiary),
+                Icon(Icons.favorite_rounded, size: 15, color: Colors.red.shade300),
                 const SizedBox(width: 3),
                 Text('${HumanFormats.formatCompactNumber(movie.popularity)}', style: styles.bodySmall?.copyWith(color: colors.tertiary)),
                 const SizedBox(width: 5),

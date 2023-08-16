@@ -27,6 +27,10 @@ class TheMovieDbDataSources extends MovieDatasourceBase {
   );
 
   @override
+  Future<List<Movie>> search({int page = 1, required String query}) async
+    => await _getMoviesImpl(page, '/search/movie', query: query);
+
+  @override
   Future<List<Movie>> getNowPlayingMovies({int page = 1}) async
     => await _getMoviesImpl(page, '/movie/now_playing');
 
@@ -43,12 +47,14 @@ class TheMovieDbDataSources extends MovieDatasourceBase {
     => _getMoviesImpl(page, '/movie/upcoming');
 
 
-  Future<List<Movie>> _getMoviesImpl(int page, String url) async {
-    final response = await dio.get(
-      url,
-      queryParameters: {
+  Future<List<Movie>> _getMoviesImpl(int page, String url, { String? query }) async {
+    var queryParameters = <String, dynamic>{
         'page': page,
-      });
+      };
+
+    if (query != null) queryParameters['query'] = query;
+
+    final response = await dio.get(url, queryParameters: queryParameters);
 
     if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
       return MovieDbResponse.fromJson(response.data).results

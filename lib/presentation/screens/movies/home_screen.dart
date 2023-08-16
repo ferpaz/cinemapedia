@@ -1,9 +1,10 @@
-import 'package:cinemapedia/presentation/providers/movies/initial_loading_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
+import 'package:cinemapedia/presentation/delegates/movie_search_delegate.dart';
+import 'package:cinemapedia/presentation/providers/movies/initial_loading_provider.dart';
 import 'package:cinemapedia/presentation/providers/providers.dart';
 import 'package:cinemapedia/presentation/widgets/widgets.dart';
 
@@ -66,7 +67,10 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           title: Text('Cinemapedia'),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                final movieRepo = ref.read(movieRepositoryProvider);
+                showSearch(context: context, delegate: MovieSearchDelegate(movieRepo.search));
+              },
               icon: Icon(Icons.search, color: colors.primary),
             ),
           ],
