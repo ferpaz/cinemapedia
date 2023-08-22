@@ -27,8 +27,8 @@ class TheMovieDbDataSources extends MovieDatasourceBase {
   );
 
   @override
-  Future<List<Movie>> search({int page = 1, required String query}) async
-    => await _getMoviesImpl(page, '/search/movie', query: query);
+  Future<List<Movie>> search({required String query}) async
+    => query.trim().isEmpty ? [] : await _getMoviesImpl(1, '/search/movie', query: query);
 
   @override
   Future<List<Movie>> getNowPlayingMovies({int page = 1}) async
