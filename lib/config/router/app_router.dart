@@ -14,7 +14,7 @@ final appRouter = GoRouter(
 
   routes: <RouteBase>[
     StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) {
+      builder: (_, state, navigationShell) {
         return Scaffold(
           body: navigationShell,
           bottomNavigationBar: MovieBottomNavigationBar(navigationShell),
@@ -27,13 +27,13 @@ final appRouter = GoRouter(
           routes: <RouteBase>[
             GoRoute(
               path: '/',
-              name: HomeScreen.routeName,
-              builder: (context, state) => const HomeView(),
+              name: HomeView.routeName,
+              builder: (_, state) => const HomeView(),
               routes: [
                 GoRoute(
                   path: 'movie/:id',
                   name: MovieScreen.routeName,
-                  builder: (context, state) {
+                  builder: (_, state) {
                     final id = state.pathParameters['id'] ?? "Unknow Id";
                     return MovieScreen(movieId: id);
                   }
@@ -47,8 +47,8 @@ final appRouter = GoRouter(
           routes: <RouteBase>[
             GoRoute(
               path: '/categories',
-              //name: FavoritesScreen.routeName,
-              builder: (context, state) => const Placeholder(),
+              name: CategoriesView.routeName,
+              builder: (_, state) => const CategoriesView(),
             ),
           ]
         ),
@@ -57,8 +57,8 @@ final appRouter = GoRouter(
           routes: <RouteBase>[
             GoRoute(
               path: '/favorites',
-              //name: FavoritesScreen.routeName,
-              builder: (context, state) => const FavoritesView(),
+              name: FavoritesView.routeName,
+              builder: (_, state) => const FavoritesView(),
             ),
           ]
         ),

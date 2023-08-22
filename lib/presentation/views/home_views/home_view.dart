@@ -9,6 +9,8 @@ import 'package:cinemapedia/presentation/widgets/widgets.dart';
 
 
 class HomeView extends ConsumerStatefulWidget {
+  static const routeName = 'home-view';
+
   const HomeView({super.key});
 
   @override

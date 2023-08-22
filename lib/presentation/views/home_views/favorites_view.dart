@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FavoritesView extends StatelessWidget {
+  static const routeName = 'favorites-view';
+
   const FavoritesView({super.key});
 
   @override
@@ -8,7 +10,6 @@ class FavoritesView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Favorites View'),
-        centerTitle: true,
       ),
       body: const Center(child: Text('Favoritos')),
     );
