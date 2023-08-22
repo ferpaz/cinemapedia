@@ -39,6 +39,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     ref.read(popularMoviesProvider.notifier).loadNextPage();
     ref.read(upcomingMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
+
+    ref.read(searchedMoviesProvider.notifier).searchMoviesByQuery(query: '');
   }
 
   @override
@@ -59,6 +61,9 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final upcomingMovies = ref.watch(upcomingMoviesProvider);
     final topRatedMovies = ref.watch(topRatedMoviesProvider);
 
+    final searchQuery = ref.watch(searchQueryProvider);
+    final searchedMovies = ref.watch(searchedMoviesProvider);
+
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -68,8 +73,15 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           actions: [
             IconButton(
               onPressed: () {
-                final movieRepo = ref.read(movieRepositoryProvider);
-                showSearch(context: context, delegate: MovieSearchDelegate(movieRepo.search));
+                showSearch(
+                  query: searchQuery,
+                  context: context,
+                  delegate: MovieSearchDelegate(
+                    initialMovies: searchedMovies,
+                    searchMovies: ref.read(searchedMoviesProvider.notifier).searchMoviesByQuery,
+
+                  )
+                );
               },
               icon: Icon(Icons.search, color: colors.primary),
             ),

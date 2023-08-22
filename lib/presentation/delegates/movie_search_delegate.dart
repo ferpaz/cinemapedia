@@ -7,26 +7,33 @@ import 'package:go_router/go_router.dart';
 import 'package:cinemapedia/config/domain/entities/movie.dart';
 import 'package:cinemapedia/config/helpers/human_formats.dart';
 
-typedef SearchMoviesCallback = Future<List<Movie>> Function({int page, required String query});
+typedef SearchMoviesCallback = Future<List<Movie>> Function({required String query});
 
 class MovieSearchDelegate extends SearchDelegate<Movie?> {
+  List<Movie> initialMovies;
+
   final SearchMoviesCallback searchMovies;
-  StreamController<List<Movie>> debouncedMovies = StreamController<List<Movie>>.broadcast();
+
+  StreamController<List<Movie>> _debouncedMovies = StreamController<List<Movie>>.broadcast();
+  StreamController<bool> _isLoadingStream = StreamController<bool>.broadcast();
+
   Timer? _debounceTimer;
 
-  MovieSearchDelegate(this.searchMovies);
+  MovieSearchDelegate({
+    this.initialMovies = const [],
+    required this.searchMovies ,
+  });
+
 
   void _onQueryChange(String query) async {
+    _isLoadingStream.add(true && query.isNotEmpty);
+
     if (_debounceTimer?.isActive ?? false) _debounceTimer?.cancel();
 
     _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
-      if (query.isEmpty) {
-        debouncedMovies.add([]);
-        return;
-      }
-
-      final movies = await searchMovies(query: query);
-      debouncedMovies.add(movies);
+      initialMovies = await searchMovies(query: query);
+      _debouncedMovies.add(initialMovies);
+      _isLoadingStream.add(false);
     });
   }
 
@@ -35,52 +42,62 @@ class MovieSearchDelegate extends SearchDelegate<Movie?> {
 
   @override
   List<Widget>? buildActions(BuildContext context) => [
-      FadeIn(
-        animate: query.isNotEmpty,
-        duration: const Duration(milliseconds: 200),
-        child: IconButton(
-          onPressed: () => query = '',
-          icon: Icon(Icons.clear)
-        ),
-      ),
-    ];
-
-  @override
-  Widget? buildLeading(BuildContext context) => IconButton(
-        onPressed: () => close(context, null),
-        icon: Icon(Icons.arrow_back)
-      );
-
-  @override
-  Widget buildResults(BuildContext context) => StreamBuilder<List<Movie>>(
-      stream: debouncedMovies.stream,
-      initialData: [],
+    StreamBuilder(
+      initialData: false,
+      stream: _isLoadingStream.stream,
       builder: (context, snapshot) {
-        final movies = snapshot.data ?? [];
+        if (snapshot.data ?? false)
+          return SpinPerfect(
+            duration: const Duration(seconds: 20),
+            spins: 10,
+            child: IconButton(
+              onPressed: () {
+                query = '';
+                _onQueryChange(query);
+              },
+              icon: Icon(Icons.refresh_rounded)
+            ),
+          );
 
-        return ListView.builder(
-          itemCount: movies.length,
-          itemBuilder: (context, index) => ListTile(
-            title: _MovieTitleSuggestion(movies[index]),
+        return FadeIn(
+          animate: query.isNotEmpty,
+          duration: const Duration(milliseconds: 200),
+          child: IconButton(
+            onPressed: () {
+              query = '';
+              _onQueryChange(query);
+            },
+            icon: Icon(Icons.clear)
           ),
         );
       },
-    );
+    ),
+  ];
 
   @override
-  Widget buildSuggestions(BuildContext context) {
-    _onQueryChange(query);
+  Widget? buildLeading(BuildContext context) => IconButton(
+    onPressed: () => close(context, null),
+    icon: Icon(Icons.arrow_back)
+  );
+
+  @override
+  Widget buildResults(BuildContext context) => _buildResultsAndSuggestions(showResults: true);
+
+  @override
+  Widget buildSuggestions(BuildContext context) => _buildResultsAndSuggestions();
+
+  Widget _buildResultsAndSuggestions({ bool showResults = false }) {
+    if (!showResults) _onQueryChange(query);
 
     return StreamBuilder<List<Movie>>(
-      stream: debouncedMovies.stream,
-      initialData: [],
+      stream: _debouncedMovies.stream,
+      initialData: initialMovies,
       builder: (context, snapshot) {
         final movies = snapshot.data ?? [];
-
         return ListView.builder(
           itemCount: movies.length,
           itemBuilder: (context, index) => ListTile(
-            title: _MovieTitleSuggestion(movies[index]),
+            title: _MovieTitleSuggestion(movies[index], showResults: showResults,),
           ),
         );
       },
@@ -91,7 +108,9 @@ class MovieSearchDelegate extends SearchDelegate<Movie?> {
 class _MovieTitleSuggestion extends StatelessWidget {
   final Movie movie;
 
-  _MovieTitleSuggestion(this.movie);
+  final bool showResults;
+
+  _MovieTitleSuggestion(this.movie, { this.showResults = false });
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +134,7 @@ class _MovieTitleSuggestion extends StatelessWidget {
                   movie.posterPath,
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) => loadingProgress == null
-                    ? FadeIn(child: child)
+                    ? showResults ? child : FadeIn(child: child)
                     : Center(child: CircularProgressIndicator()),
                 )
               ),
