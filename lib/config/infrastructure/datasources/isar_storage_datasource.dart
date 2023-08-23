@@ -45,7 +45,7 @@ class IsarStorageDatasource extends LocalStorageDatasourceBase {
     if (m == null) {
       await db.writeTxn(() async => db.movies.put(movie));
     } else {
-      await db.writeTxn(() async => db.movies.delete(movie.pk!));
+      await db.writeTxn(() async => db.movies.delete(m.pk!));
     }
   }
 

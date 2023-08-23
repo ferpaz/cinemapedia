@@ -57,22 +57,41 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   }
 }
 
-class _MovieDetailsSliverAppBar extends StatelessWidget {
+class _MovieDetailsSliverAppBar extends ConsumerWidget {
 
   final Movie movie;
 
-  const _MovieDetailsSliverAppBar({
+  _MovieDetailsSliverAppBar({
     required this.movie
   });
 
+  final _favoriteIcons = <Icon>[
+    Icon(Icons.favorite_border),
+    Icon(Icons.favorite_rounded, color: Colors.red,),
+  ];
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
+    final isFavoriteMovie = ref.watch(isFavoriteMovieProvider(movie.id));
 
     return SliverAppBar(
       backgroundColor: Colors.black,
       expandedHeight: size.height * 0.7,
       foregroundColor: Colors.white,
+      actions: [
+        IconButton(
+          onPressed: () {
+            ref.watch(localStorageRepositoryProvider).toggleFavorite(movie)
+              .whenComplete(() => ref.invalidate(isFavoriteMovieProvider(movie.id)));
+          },
+          icon: isFavoriteMovie.when(
+            loading: () => _favoriteIcons[0],
+            data: (isFavorite) => _favoriteIcons[isFavorite ? 1 : 0],
+            error: (error, stacktrace) => throw UnimplementedError(),
+          )
+        ),
+      ],
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
           children: [
@@ -86,20 +105,44 @@ class _MovieDetailsSliverAppBar extends StatelessWidget {
               ),
             ),
 
-            const SizedBox.expand(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    colors: [Colors.black87, Colors.transparent],
-                    stops: [0, 0.18],
-                  ),
-                ),
-              ),
-            )
+            _ShadowGradient(begin: Alignment.topRight, end: Alignment.bottomLeft, stops: [0, 0.2], colors: [Colors.black54, Colors.transparent],),
+
+            _ShadowGradient(begin: Alignment.topCenter, end:Alignment.bottomCenter, stops: [0.8, 1], colors: [Colors.transparent, Colors.black54],),
+
+            _ShadowGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, stops: [0, 0.2], colors: [Colors.black54, Colors.transparent],),
 
           ],
         )
+      ),
+    );
+  }
+}
+
+class _ShadowGradient extends StatelessWidget {
+  final AlignmentGeometry begin;
+  final AlignmentGeometry end;
+  final List<double> stops;
+  final List<Color> colors;
+
+  const _ShadowGradient({
+    this.begin = Alignment.centerLeft,
+    this.end = Alignment.centerLeft,
+    required this.stops,
+    required this.colors,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.expand(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: begin,
+            end: end,
+            colors: colors,
+            stops: stops,
+          ),
+        ),
       ),
     );
   }
