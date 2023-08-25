@@ -8,7 +8,7 @@ class IsarStorageRepository extends LocalStorageRepositoryBase {
   IsarStorageRepository(this.localStorageDatasource);
 
   @override
-  Future<List<Movie>> getFavoriteMovies({int limit = 10, offset = 0}) => localStorageDatasource.getFavoriteMovies(limit: limit, offset: offset);
+  Future<List<Movie>> getFavoriteMovies({int limit = 10, int offset = 0}) => localStorageDatasource.getFavoriteMovies(limit: limit, offset: offset);
 
   @override
   Future<bool> isMovieFavorite(String movieId) => localStorageDatasource.isMovieFavorite(movieId);

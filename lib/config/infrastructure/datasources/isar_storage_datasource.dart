@@ -50,7 +50,7 @@ class IsarStorageDatasource extends LocalStorageDatasourceBase {
   }
 
   @override
-  Future<List<Movie>> getFavoriteMovies({int limit = 10, offset = 0}) async {
+  Future<List<Movie>> getFavoriteMovies({int limit = 10, int offset = 0}) async {
     final db = await database;
 
     return db.movies.where()
