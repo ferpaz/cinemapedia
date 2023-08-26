@@ -1,9 +1,11 @@
+import 'package:cinemapedia/config/domain/entities/genre.dart';
+
 class MovieDetailsFromMovieDb {
     bool adult;
     String backdropPath;
     BelongsToCollection? belongsToCollection;
     int budget;
-    List<Genre> genres;
+    List<GenreFromMovieDb> genres;
     String homepage;
     String id;
     String imdbId;
@@ -58,7 +60,7 @@ class MovieDetailsFromMovieDb {
         backdropPath: json["backdrop_path"],
         belongsToCollection: json["belongs_to_collection"] != null ? BelongsToCollection.fromJson(json["belongs_to_collection"]) : null,
         budget: json["budget"],
-        genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
+        genres: List<GenreFromMovieDb>.from(json["genres"].map((x) => GenreFromMovieDb.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"].toString(),
         imdbId: json["imdb_id"],
@@ -138,16 +140,13 @@ class BelongsToCollection {
     };
 }
 
-class Genre {
-    int id;
-    String name;
+class GenreFromMovieDb extends Genre {
+    GenreFromMovieDb({
+        required int id,
+        required String name,
+    }) : super(id: id, name: name);
 
-    Genre({
-        required this.id,
-        required this.name,
-    });
-
-    factory Genre.fromJson(Map<String, dynamic> json) => Genre(
+    factory GenreFromMovieDb.fromJson(Map<String, dynamic> json) => GenreFromMovieDb(
         id: json["id"],
         name: json["name"],
     );

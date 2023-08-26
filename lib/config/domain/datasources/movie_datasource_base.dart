@@ -1,3 +1,4 @@
+import 'package:cinemapedia/config/domain/entities/genre.dart';
 import 'package:cinemapedia/config/domain/entities/movie.dart';
 
 abstract class MovieDatasourceBase {
@@ -14,4 +15,7 @@ abstract class MovieDatasourceBase {
 
   Future<Movie> getMovieDetailsById(String movieId);
 
+  Future<List<Genre>> getGenres();
+
+  Future<List<Movie>> getMoviesByGenre({ required int genreId, int page = 1 });
 }

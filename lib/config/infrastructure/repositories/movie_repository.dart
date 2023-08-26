@@ -1,4 +1,5 @@
 import 'package:cinemapedia/config/domain/datasources/movie_datasource_base.dart';
+import 'package:cinemapedia/config/domain/entities/genre.dart';
 import 'package:cinemapedia/config/domain/entities/movie.dart';
 import 'package:cinemapedia/config/domain/repositories/movie_repository_base.dart';
 
@@ -24,5 +25,11 @@ class MovieRepository extends MovieRepositoryBase {
 
   @override
   Future<Movie> getMovieDetailsById(String movieId) => movieDataSource.getMovieDetailsById(movieId);
+
+  @override
+  Future<List<Genre>> getGenres() => movieDataSource.getGenres();
+
+  @override
+  Future<List<Movie>> getMoviesByGenre({required int genreId, int page = 1}) => movieDataSource.getMoviesByGenre(genreId: genreId, page: page);
 
 }

@@ -1,8 +1,10 @@
+import 'package:cinemapedia/config/infrastructure/mappers/genre_mapper.dart';
 import 'package:cinemapedia/config/infrastructure/models/moviedb_models.dart';
 import 'package:dio/dio.dart';
 
 import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:cinemapedia/config/domain/datasources/movie_datasource_base.dart';
+import 'package:cinemapedia/config/domain/entities/genre.dart';
 import 'package:cinemapedia/config/domain/entities/movie.dart';
 import 'package:cinemapedia/config/infrastructure/mappers/movie_mapper.dart';
 
@@ -75,5 +77,24 @@ class TheMovieDbDataSources extends MovieDatasourceBase {
     }
 
     throw Exception('Movie with id: $movieId not found');
+  }
+
+  @override
+  Future<List<Genre>> getGenres() async {
+    final response = await dio.get('/genre/movie/list');
+
+    if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
+      return GenresDbResponse.fromJson(response.data).genres
+        .map((g) => GenreMapper.genreFromMovieDbToEntity(g))
+        .toList();
+    }
+
+    throw Exception('Can\'t get genres');
+  }
+
+  @override
+  Future<List<Movie>> getMoviesByGenre({required int genreId, int page = 1}) {
+    // TODO: implement getMoviesByGenre
+    throw UnimplementedError();
   }
 }
