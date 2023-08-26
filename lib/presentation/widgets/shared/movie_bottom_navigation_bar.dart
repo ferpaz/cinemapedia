@@ -6,28 +6,6 @@ class MovieBottomNavigationBar extends StatelessWidget {
 
   MovieBottomNavigationBar(this.navigationShell, {super.key});
 
-  // int _currentIndex(BuildContext context) {
-  //   final String location = GoRouterState.of(context).matchedLocation;
-  //   if (location == '/') {
-  //     return 0;
-  //   } else if (location == '/categories') {
-  //     return 1;
-  //   } else if (location == '/favorites') {
-  //     return 2;
-  //   }
-  //   return 0;
-  // }
-
-  // void onTappedItem(BuildContext context, int value) {
-  //   if (value == 0) {
-  //     context.go('/');
-  //   } else if (value == 1) {
-  //     context.go('/categories');
-  //   } else if (value == 2) {
-  //     context.go('/favorites');
-  //   }
-  // }
-
   void _onTap(index) => navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,
