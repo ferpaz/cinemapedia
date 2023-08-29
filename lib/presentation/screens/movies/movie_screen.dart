@@ -223,7 +223,7 @@ class _MovieOverview extends StatelessWidget {
                         Row(
                           children: [
                             const SizedBox(width: 5),
-                            Text('Est. ${HumanFormats.formatDate(movie.releaseDate!)}', style: styles.bodySmall?.copyWith(color: colors.tertiary)),
+                            Text('Est. ${HumanFormats.formatDateDMY(movie.releaseDate!)}', style: styles.bodySmall?.copyWith(color: colors.tertiary)),
                           ],
                         ),
 

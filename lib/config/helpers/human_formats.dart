@@ -16,7 +16,9 @@ class HumanFormats {
       locale: 'en',
     ).format( number );
 
-  static String formatDate(DateTime date)
+  static String formatDateDMY(DateTime date)
     => DateFormat('d/M/yyyy').format(date);
 
+  static String formatDateYMD(DateTime date)
+    => DateFormat('yyyy-MM-dd').format(date);
 }

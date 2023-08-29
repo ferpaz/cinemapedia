@@ -1,6 +1,8 @@
-import 'package:cinemapedia/presentation/providers/genres/genres_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:cinemapedia/presentation/providers/providers.dart';
 
 class CategoriesView extends ConsumerStatefulWidget {
   static const routeName = 'categories-view';
@@ -41,7 +43,9 @@ class _CategoriesViewState extends ConsumerState<CategoriesView> {
           return ListTile(
             title: Text(genre.name),
             trailing: Icon(Icons.arrow_forward_ios_rounded),
-            onTap: () => {},
+            onTap: () => {
+              context.push('/categories/movies/${genre.id}'),
+            },
           );
         },
       )

@@ -46,3 +46,38 @@ class MoviesNotifier extends StateNotifier<List<Movie>> {
     isLoading = false;
   }
 }
+
+final moviesByGenreProvider = StateNotifierProvider<MoviesByGenreNotifier, Map<int, List<Movie>>>((ref) {
+  final fetchMoreMovies = ref.watch( movieRepositoryProvider ).getMoviesByGenre;
+  return MoviesByGenreNotifier(fetchMoreMovies: fetchMoreMovies);
+});
+
+typedef MovieByGenreCallback = Future<List<Movie>> Function(int genreId, { int page });
+
+class MoviesByGenreNotifier extends StateNotifier<Map<int, List<Movie>>> {
+  int currentPage = 0;
+  bool isLoading = false;
+  MovieByGenreCallback fetchMoreMovies;
+
+  MoviesByGenreNotifier({
+    required this.fetchMoreMovies,
+  }) : super({});
+
+  Future<void> loadNextPage(int genreId) async {
+    if (isLoading) return;
+
+    currentPage++;
+    final movies = await fetchMoreMovies(genreId, page: currentPage);
+
+    // add movies to the state map using genreId as key, consider if the state is null, if the state does not have any movies asociated to the genreId, and if the state has the genreId, add the movies to the existing list
+    state = {
+      ...state,
+      genreId: [
+        ...state[genreId] ?? [],
+        ...movies
+      ]
+    };
+
+    isLoading = false;
+  }
+}

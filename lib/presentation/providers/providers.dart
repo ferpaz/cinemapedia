@@ -1,6 +1,8 @@
 export 'actors/actor_provider.dart';
 export 'actors/actor_repository_provider.dart';
 
+export 'genres/genres_provider.dart';
+
 export 'movies/initial_loading_provider.dart';
 export 'movies/movie_details_provider.dart';
 export 'movies/movie_providers.dart';

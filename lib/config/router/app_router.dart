@@ -49,6 +49,16 @@ final appRouter = GoRouter(
               path: '/categories',
               name: CategoriesView.routeName,
               builder: (_, state) => const CategoriesView(),
+              routes: [
+                GoRoute(
+                  path: 'movies/:id',
+                  name: MoviesByCategoryView.routeName,
+                  builder: (_, state) {
+                    final id = state.pathParameters['id'] ?? "Unknow Id";
+                    return MoviesByCategoryView(categoryId: id);
+                  }
+                ),
+              ]
             ),
           ]
         ),

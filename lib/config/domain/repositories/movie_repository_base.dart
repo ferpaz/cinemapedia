@@ -17,6 +17,6 @@ abstract class MovieRepositoryBase {
 
   Future<List<Genre>> getGenres();
 
-  Future<List<Movie>> getMoviesByGenre({ required int genreId, int page = 1 });
+  Future<List<Movie>> getMoviesByGenre(int genreId, { int page = 1 });
 
 }

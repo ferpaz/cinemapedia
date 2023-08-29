@@ -1,3 +1,4 @@
+import 'package:cinemapedia/config/helpers/human_formats.dart';
 import 'package:cinemapedia/config/infrastructure/mappers/genre_mapper.dart';
 import 'package:cinemapedia/config/infrastructure/models/moviedb_models.dart';
 import 'package:dio/dio.dart';
@@ -93,8 +94,22 @@ class TheMovieDbDataSources extends MovieDatasourceBase {
   }
 
   @override
-  Future<List<Movie>> getMoviesByGenre({required int genreId, int page = 1}) {
-    // TODO: implement getMoviesByGenre
-    throw UnimplementedError();
+  Future<List<Movie>> getMoviesByGenre(int genreId, { int page = 1 }) async {
+    var queryParameters = <String, dynamic>{
+        'page': page,
+        'with_genres': genreId,
+        'release_date.lte': HumanFormats.formatDateYMD(DateTime.now())
+      };
+
+    final response = await dio.get('/discover/movie', queryParameters: queryParameters);
+
+    if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
+      return MovieDbResponse.fromJson(response.data).results
+        .where((m) => m.posterPath != '')    // esto no sirve porque siempre regresa algo pero para demostrar las lambdas
+        .map((m) => MovieMapper.movieFromMovieDbToEntity(m))
+        .toList();
+    }
+
+    return [];
   }
 }

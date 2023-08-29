@@ -30,6 +30,6 @@ class MovieRepository extends MovieRepositoryBase {
   Future<List<Genre>> getGenres() => movieDataSource.getGenres();
 
   @override
-  Future<List<Movie>> getMoviesByGenre({required int genreId, int page = 1}) => movieDataSource.getMoviesByGenre(genreId: genreId, page: page);
+  Future<List<Movie>> getMoviesByGenre(int genreId, { int page = 1 }) => movieDataSource.getMoviesByGenre(genreId, page: page);
 
 }
