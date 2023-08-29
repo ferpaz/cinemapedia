@@ -52,6 +52,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
     final searchQuery = ref.watch(searchQueryProvider);
     final searchedMovies = ref.watch(searchedMoviesProvider);
 
+    final isDarkMode = ref.watch(darkModeProvider) == true;
+
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -72,6 +74,17 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 );
               },
               icon: Icon(Icons.search, color: colors.primary),
+
+            ),
+
+            IconButton(
+              onPressed: () {
+                ref.read(darkModeProvider.notifier).toggleDarkMode();
+              },
+              icon: Icon(
+                isDarkMode ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                color: colors.primary,
+              ),
             ),
           ],
 
@@ -80,36 +93,39 @@ class _HomeViewState extends ConsumerState<HomeView> {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              return Column(children: [
-                MovieSlideShow(movies: slideShowMovies),
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Column(children: [
+                  MovieSlideShow(movies: slideShowMovies),
 
-                MovieHorizontalListView(
-                  movies: nowPlayingMovies,
-                  title: 'En cartelera',
-                  subtitle: '${DateFormat('EEEEE', 'es-US').format(DateTime.now())} ${DateTime.now().day}',
-                  loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
-                ),
+                  MovieHorizontalListView(
+                    movies: nowPlayingMovies,
+                    title: 'En cartelera',
+                    subtitle: '${DateFormat('EEEEE', 'es-US').format(DateTime.now())} ${DateTime.now().day}',
+                    loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                  ),
 
-                MovieHorizontalListView(
-                  movies: upcomingMovies,
-                  title: 'Próximamente en cines',
-                  loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
-                ),
+                  MovieHorizontalListView(
+                    movies: upcomingMovies,
+                    title: 'Próximamente en cines',
+                    loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
+                  ),
 
-                MovieHorizontalListView(
-                  movies: popularMovies,
-                  title: 'Populares',
-                  loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
-                ),
+                  MovieHorizontalListView(
+                    movies: popularMovies,
+                    title: 'Populares',
+                    loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
+                  ),
 
-                MovieHorizontalListView(
-                  movies: topRatedMovies,
-                  title: 'Mejor calificadas',
-                  loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
-                ),
+                  MovieHorizontalListView(
+                    movies: topRatedMovies,
+                    title: 'Mejor calificadas',
+                    loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
+                  ),
 
-                const SizedBox(height: 10),
-              ]);
+                  const SizedBox(height: 10),
+                ]),
+              );
             },
             childCount: 1,
           ),

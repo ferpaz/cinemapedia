@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import 'package:cinemapedia/config/di/get_it.dart';
 import 'package:cinemapedia/config/router/app_router.dart';
-import 'package:cinemapedia/config/theme/app_theme.dart';
-import 'package:intl/intl.dart';
+import 'package:cinemapedia/presentation/providers/providers.dart';
 
 
 Future<void> main() async {
-
   Intl.defaultLocale = 'es_US';
 
   // Load .env file
@@ -21,14 +20,24 @@ Future<void> main() async {
   runApp(const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final darkMode = ref.watch(darkModeProvider);
+
+    //final isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.themeData(),
+      title: 'Cinemapedia',
+      theme: ThemeData(
+        useMaterial3: true,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      darkTheme: ThemeData.dark(),
+      themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
       routerConfig: appRouter,
     );
   }

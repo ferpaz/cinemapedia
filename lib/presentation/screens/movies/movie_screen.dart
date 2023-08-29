@@ -208,22 +208,25 @@ class _MovieOverview extends StatelessWidget {
                       Row(
                         children: [
                           const SizedBox(width: 3),
-                          Icon(Icons.star_half_outlined, size: 15, color: colors.tertiary),
+                          Icon(Icons.star_half_outlined, size: 15, color: Colors.amber.shade600),
                           const SizedBox(width: 3),
-                          Text('${HumanFormats.formatNumber(movie.voteAverage)}',style: styles.bodyMedium?.copyWith(color: colors.tertiary)),
+                          Text('${HumanFormats.formatNumber(movie.voteAverage)}',style: styles.bodySmall),
                           const Spacer(),
-                          Icon(Icons.favorite_outline, size: 15, color: colors.tertiary),
+                          Icon(Icons.thumb_up_alt_rounded, size: 15, color: Colors.red.shade300),
                           const SizedBox(width: 3),
-                          Text('${HumanFormats.formatCompactNumber(movie.popularity)}', style: styles.bodySmall?.copyWith(color: colors.tertiary)),
+                          Text('${HumanFormats.formatCompactNumber(movie.popularity)}', style: styles.bodySmall),
                           const SizedBox(width: 3),
                         ],
                       ),
 
                       if (movie.releaseDate != null)
+                        const SizedBox(height: 5),
+
+                      if (movie.releaseDate != null)
                         Row(
                           children: [
-                            const SizedBox(width: 5),
-                            Text('Est. ${HumanFormats.formatDateDMY(movie.releaseDate!)}', style: styles.bodySmall?.copyWith(color: colors.tertiary)),
+                            const Spacer(),
+                            Text('${HumanFormats.formatDateDMMMY(movie.releaseDate!)}', style: styles.bodySmall),
                           ],
                         ),
 
@@ -312,6 +315,7 @@ class _MovieActorsListState extends ConsumerState<_MovieActorsList> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Actores', style: styles.titleMedium),
+          SizedBox(height: 5),
 
           SizedBox(
             height: 300,
@@ -346,8 +350,8 @@ class _MovieActorsListState extends ConsumerState<_MovieActorsList> {
 
                         SizedBox(height: 5),
 
-                        Text(actor.name, style: styles.labelLarge!.copyWith(fontWeight: FontWeight.w500), maxLines: 2, overflow: TextOverflow.ellipsis,),
-                        Text(actor.character ?? '', style: styles.labelSmall, maxLines: 2, overflow: TextOverflow.ellipsis,),
+                        Text(actor.name, style: styles.bodyMedium!.copyWith(fontWeight: FontWeight.w500), maxLines: 2, overflow: TextOverflow.ellipsis,),
+                        Text(actor.character ?? '', style: styles.bodySmall, maxLines: 2, overflow: TextOverflow.ellipsis,),
                       ],
 
                     ),

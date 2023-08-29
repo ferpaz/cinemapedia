@@ -46,7 +46,6 @@ class MovieSearchSlide extends StatelessWidget {
 
             const SizedBox(width: 10),
 
-
             SizedBox(
               width: size.width * 0.68,
               child: Column(
@@ -54,14 +53,14 @@ class MovieSearchSlide extends StatelessWidget {
                 children: [
                   Text(movie.title, maxLines: 1, overflow: TextOverflow.ellipsis, style: styles.bodyMedium,),
                   const SizedBox(height: 3),
-                  Text(movie.overview, maxLines: 3, overflow: TextOverflow.ellipsis, style: styles.labelSmall,),
+                  Text(movie.overview, maxLines: 3, overflow: TextOverflow.ellipsis, style: styles.bodySmall,),
                   const SizedBox(height: 3),
                   // generar tantas estrellas de acuerdo a movie.voteAverage
                   Row(
                     children: [
                       Icon(Icons.star_half_outlined, size: 15, color: Colors.amber.shade600),
                       const SizedBox(width: 3),
-                      Text(HumanFormats.formatNumber(movie.voteAverage), style: styles.labelSmall!.copyWith(color: colors.tertiary)),
+                      Text(HumanFormats.formatNumber(movie.voteAverage), style: styles.bodySmall),
                     ],
                   ),
                 ],

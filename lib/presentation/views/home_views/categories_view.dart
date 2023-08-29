@@ -32,9 +32,22 @@ class _CategoriesViewState extends ConsumerState<CategoriesView> {
       );
     }
 
+    final isDarkMode = ref.watch(darkModeProvider) == true;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Categorias'),
+      actions: [
+          IconButton(
+              onPressed: () {
+                ref.read(darkModeProvider.notifier).toggleDarkMode();
+              },
+              icon: Icon(
+                isDarkMode ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+        ],
       ),
       body: ListView.builder(
         itemCount: genres.length,

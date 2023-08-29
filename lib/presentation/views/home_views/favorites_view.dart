@@ -36,6 +36,7 @@ class _FavoritesViewState extends ConsumerState<FavoritesView> {
   @override
   Widget build(BuildContext context) {
     final _favoriteMovies = ref.watch(favoriteMoviesProvider).values.toList();
+    final isDarkMode = ref.watch(darkModeProvider) == true;
 
     if (_favoriteMovies.isEmpty)
     {
@@ -53,9 +54,26 @@ class _FavoritesViewState extends ConsumerState<FavoritesView> {
     }
 
     return Scaffold(
-      body: MovieMasonery(
-        movies: _favoriteMovies,
-        loadNextPage: loadlNextPage
+      appBar: AppBar(
+        title: Text('Favoritos'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                ref.read(darkModeProvider.notifier).toggleDarkMode();
+              },
+              icon: Icon(
+                isDarkMode ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: MovieMasonery(
+          movies: _favoriteMovies,
+          loadNextPage: loadlNextPage
+        ),
       ),
     );
   }

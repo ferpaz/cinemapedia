@@ -19,6 +19,9 @@ class HumanFormats {
   static String formatDateDMY(DateTime date)
     => DateFormat('d/M/yyyy').format(date);
 
+  static String formatDateDMMMY(DateTime date)
+    => DateFormat('d/MMM/yyyy').format(date).toUpperCase();
+
   static String formatDateYMD(DateTime date)
     => DateFormat('yyyy-MM-dd').format(date);
 }

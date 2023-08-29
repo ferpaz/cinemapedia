@@ -14,6 +14,8 @@ class MovieBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      selectedIconTheme: Theme.of(context).iconTheme.copyWith(color: Theme.of(context).colorScheme.primary),
+      selectedItemColor: Theme.of(context).colorScheme.primary,
       elevation: 0,
       currentIndex: navigationShell.currentIndex, // _currentIndex(context),
       onTap: _onTap, // (value) => onTappedItem(context, value),
@@ -21,7 +23,7 @@ class MovieBottomNavigationBar extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
           label: 'Inicio',
-          activeIcon: Icon(Icons.home_rounded)
+          activeIcon: Icon(Icons.home_rounded),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.category_outlined),
