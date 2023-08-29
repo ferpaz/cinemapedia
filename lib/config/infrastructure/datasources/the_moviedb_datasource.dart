@@ -98,6 +98,7 @@ class TheMovieDbDataSources extends MovieDatasourceBase {
     var queryParameters = <String, dynamic>{
         'page': page,
         'with_genres': genreId,
+        'sort_by': 'popularity.desc',
         'release_date.lte': HumanFormats.formatDateYMD(DateTime.now())
       };
 
