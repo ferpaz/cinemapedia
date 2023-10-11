@@ -1,7 +1,7 @@
-import 'package:cinemapedia/config/domain/datasources/movie_datasource_base.dart';
-import 'package:cinemapedia/config/domain/entities/genre.dart';
-import 'package:cinemapedia/config/domain/entities/movie.dart';
-import 'package:cinemapedia/config/domain/repositories/movie_repository_base.dart';
+import 'package:cinemafan/config/domain/datasources/movie_datasource_base.dart';
+import 'package:cinemafan/config/domain/entities/genre.dart';
+import 'package:cinemafan/config/domain/entities/movie.dart';
+import 'package:cinemafan/config/domain/repositories/movie_repository_base.dart';
 
 class MovieRepository extends MovieRepositoryBase {
   final MovieDatasourceBase movieDataSource;

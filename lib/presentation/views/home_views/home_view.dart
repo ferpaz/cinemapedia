@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
-import 'package:cinemapedia/presentation/delegates/movie_search_delegate.dart';
-import 'package:cinemapedia/presentation/providers/providers.dart';
-import 'package:cinemapedia/presentation/widgets/widgets.dart';
+import 'package:cinemafan/presentation/delegates/movie_search_delegate.dart';
+import 'package:cinemafan/presentation/providers/providers.dart';
+import 'package:cinemafan/presentation/widgets/widgets.dart';
 
 
 class HomeView extends ConsumerStatefulWidget {
@@ -59,7 +59,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
         SliverAppBar(
           floating: true,
           leading: Icon(Icons.movie_outlined, color: colors.primary),
-          title: Text('Cinemapedia'),
+          title: Text('Cinema Fan'),
           actions: [
             IconButton(
               onPressed: () {

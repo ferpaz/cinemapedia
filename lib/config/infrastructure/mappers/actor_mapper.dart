@@ -1,6 +1,6 @@
-import 'package:cinemapedia/config/constants/environment.dart';
-import 'package:cinemapedia/config/domain/entities/actor.dart';
-import 'package:cinemapedia/config/infrastructure/models/moviedb_models.dart';
+import 'package:cinemafan/config/constants/environment.dart';
+import 'package:cinemafan/config/domain/entities/actor.dart';
+import 'package:cinemafan/config/infrastructure/models/moviedb_models.dart';
 
 class ActoMapper {
   static int _imageWidth = 200;

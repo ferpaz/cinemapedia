@@ -1,13 +1,13 @@
-import 'package:cinemapedia/config/helpers/human_formats.dart';
-import 'package:cinemapedia/config/infrastructure/mappers/genre_mapper.dart';
-import 'package:cinemapedia/config/infrastructure/models/moviedb_models.dart';
+import 'package:cinemafan/config/helpers/human_formats.dart';
+import 'package:cinemafan/config/infrastructure/mappers/genre_mapper.dart';
+import 'package:cinemafan/config/infrastructure/models/moviedb_models.dart';
 import 'package:dio/dio.dart';
 
-import 'package:cinemapedia/config/constants/environment.dart';
-import 'package:cinemapedia/config/domain/datasources/movie_datasource_base.dart';
-import 'package:cinemapedia/config/domain/entities/genre.dart';
-import 'package:cinemapedia/config/domain/entities/movie.dart';
-import 'package:cinemapedia/config/infrastructure/mappers/movie_mapper.dart';
+import 'package:cinemafan/config/constants/environment.dart';
+import 'package:cinemafan/config/domain/datasources/movie_datasource_base.dart';
+import 'package:cinemafan/config/domain/entities/genre.dart';
+import 'package:cinemafan/config/domain/entities/movie.dart';
+import 'package:cinemafan/config/infrastructure/mappers/movie_mapper.dart';
 
 class TheMovieDbDataSources extends MovieDatasourceBase {
 

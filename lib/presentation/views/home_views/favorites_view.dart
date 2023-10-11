@@ -1,8 +1,8 @@
-import 'package:cinemapedia/presentation/widgets/movies/movie_masonry.dart';
+import 'package:cinemafan/presentation/widgets/movies/movie_masonry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:cinemapedia/presentation/providers/providers.dart';
+import 'package:cinemafan/presentation/providers/providers.dart';
 
 class FavoritesView extends ConsumerStatefulWidget {
   static const routeName = 'favorites-view';

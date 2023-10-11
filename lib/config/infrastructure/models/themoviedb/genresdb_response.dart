@@ -1,4 +1,4 @@
-import 'package:cinemapedia/config/infrastructure/models/moviedb_models.dart';
+import 'package:cinemafan/config/infrastructure/models/moviedb_models.dart';
 
 class GenresDbResponse {
   GenresDbResponse({

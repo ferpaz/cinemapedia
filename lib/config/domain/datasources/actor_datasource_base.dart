@@ -1,4 +1,4 @@
-import 'package:cinemapedia/config/domain/entities/actor.dart';
+import 'package:cinemafan/config/domain/entities/actor.dart';
 
 abstract class ActorDatasourceBase {
 

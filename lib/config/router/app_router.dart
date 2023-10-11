@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:cinemapedia/presentation/screens/screens.dart';
-import 'package:cinemapedia/presentation/views/views.dart';
-import 'package:cinemapedia/presentation/widgets/widgets.dart';
+import 'package:cinemafan/presentation/screens/screens.dart';
+import 'package:cinemafan/presentation/views/views.dart';
+import 'package:cinemafan/presentation/widgets/widgets.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey = GlobalKey<NavigatorState>();

@@ -3,9 +3,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'package:cinemapedia/config/di/get_it.dart';
-import 'package:cinemapedia/config/router/app_router.dart';
-import 'package:cinemapedia/presentation/providers/providers.dart';
+import 'package:cinemafan/config/di/get_it.dart';
+import 'package:cinemafan/config/router/app_router.dart';
+import 'package:cinemafan/presentation/providers/providers.dart';
 
 
 Future<void> main() async {
@@ -31,7 +31,7 @@ class MainApp extends ConsumerWidget {
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Cinemapedia',
+      title: 'Cinema Fan',
       theme: ThemeData(
         useMaterial3: true,
         visualDensity: VisualDensity.adaptivePlatformDensity,

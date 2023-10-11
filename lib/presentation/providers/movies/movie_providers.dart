@@ -1,7 +1,7 @@
-import 'package:cinemapedia/presentation/providers/providers.dart';
+import 'package:cinemafan/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:cinemapedia/config/domain/entities/movie.dart';
+import 'package:cinemafan/config/domain/entities/movie.dart';
 
 final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
   final fetchMoreMovies = ref.watch( movieRepositoryProvider ).getNowPlayingMovies;

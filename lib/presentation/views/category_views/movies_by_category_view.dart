@@ -1,8 +1,8 @@
-import 'package:cinemapedia/presentation/widgets/widgets.dart';
+import 'package:cinemafan/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:cinemapedia/presentation/providers/providers.dart';
+import 'package:cinemafan/presentation/providers/providers.dart';
 
 class MoviesByCategoryView extends ConsumerStatefulWidget {
   static String routeName = 'movies-by-category-view';

@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 
-import 'package:cinemapedia/config/domain/entities/movie.dart';
-import 'package:cinemapedia/presentation/widgets/widgets.dart';
+import 'package:cinemafan/config/domain/entities/movie.dart';
+import 'package:cinemafan/presentation/widgets/widgets.dart';
 
 typedef SearchMoviesCallback = Future<List<Movie>> Function({required String query});
 

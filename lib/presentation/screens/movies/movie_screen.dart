@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
 
-import 'package:cinemapedia/config/domain/entities/movie.dart';
-import 'package:cinemapedia/config/helpers/human_formats.dart';
-import 'package:cinemapedia/presentation/providers/providers.dart';
+import 'package:cinemafan/config/domain/entities/movie.dart';
+import 'package:cinemafan/config/helpers/human_formats.dart';
+import 'package:cinemafan/presentation/providers/providers.dart';
 
 class MovieScreen extends ConsumerStatefulWidget {
   static const routeName = 'movie-screen';
@@ -178,7 +178,6 @@ class _MovieOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final styles = Theme.of(context).textTheme;
-    final colors = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
 
     return Padding(

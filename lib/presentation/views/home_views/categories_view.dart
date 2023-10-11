@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:cinemapedia/presentation/providers/providers.dart';
+import 'package:cinemafan/presentation/providers/providers.dart';
 
 class CategoriesView extends ConsumerStatefulWidget {
   static const routeName = 'categories-view';

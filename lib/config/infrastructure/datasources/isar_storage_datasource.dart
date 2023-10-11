@@ -1,8 +1,8 @@
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:cinemapedia/config/domain/datasources/local_storage_datasource_base.dart';
-import 'package:cinemapedia/config/domain/entities/movie.dart';
+import 'package:cinemafan/config/domain/datasources/local_storage_datasource_base.dart';
+import 'package:cinemafan/config/domain/entities/movie.dart';
 
 class IsarStorageDatasource extends LocalStorageDatasourceBase {
   late Future<Isar> database;

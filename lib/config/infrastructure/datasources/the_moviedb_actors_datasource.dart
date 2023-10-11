@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 
-import 'package:cinemapedia/config/constants/environment.dart';
-import 'package:cinemapedia/config/domain/datasources/actor_datasource_base.dart';
-import 'package:cinemapedia/config/domain/entities/actor.dart';
-import 'package:cinemapedia/config/infrastructure/mappers/actor_mapper.dart';
-import 'package:cinemapedia/config/infrastructure/models/moviedb_models.dart';
+import 'package:cinemafan/config/constants/environment.dart';
+import 'package:cinemafan/config/domain/datasources/actor_datasource_base.dart';
+import 'package:cinemafan/config/domain/entities/actor.dart';
+import 'package:cinemafan/config/infrastructure/mappers/actor_mapper.dart';
+import 'package:cinemafan/config/infrastructure/models/moviedb_models.dart';
 
 class TheMovieDbActorsDatasource extends ActorDatasourceBase {
 

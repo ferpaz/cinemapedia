@@ -1,6 +1,6 @@
-import 'package:cinemapedia/config/constants/environment.dart';
-import 'package:cinemapedia/config/domain/entities/movie.dart';
-import 'package:cinemapedia/config/infrastructure/models/moviedb_models.dart';
+import 'package:cinemafan/config/constants/environment.dart';
+import 'package:cinemafan/config/domain/entities/movie.dart';
+import 'package:cinemafan/config/infrastructure/models/moviedb_models.dart';
 
 class MovieMapper {
   static const String _imageWidth = '500';

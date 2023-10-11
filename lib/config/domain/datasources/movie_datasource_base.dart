@@ -1,5 +1,5 @@
-import 'package:cinemapedia/config/domain/entities/genre.dart';
-import 'package:cinemapedia/config/domain/entities/movie.dart';
+import 'package:cinemafan/config/domain/entities/genre.dart';
+import 'package:cinemafan/config/domain/entities/movie.dart';
 
 abstract class MovieDatasourceBase {
 

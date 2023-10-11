@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import 'package:cinemapedia/config/domain/entities/movie.dart';
-import 'package:cinemapedia/presentation/widgets/widgets.dart';
+import 'package:cinemafan/config/domain/entities/movie.dart';
+import 'package:cinemafan/presentation/widgets/widgets.dart';
 
 class MovieMasonery extends StatefulWidget {
   final List<Movie> movies;
