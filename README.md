@@ -33,3 +33,15 @@
 ``` bash
         flutter pub run flutter_launcher_icons
 ```
+
+3. Cambiar el Splash Screen
+
+   Instalar el paquete 'flutter_native_splash'
+
+   Modificar el pubspec.yaml con la configuración deseada
+
+   Y luego se ejecuta esta instrucción para crear el splash screen
+
+``` bash
+        dart run flutter_native_splash:create
+```
