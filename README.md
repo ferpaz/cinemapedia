@@ -1,4 +1,12 @@
-# CinemaFan
+# Cinema Fan
+
+   Enciclopedia de películas y series para entusiastas del cine y las series
+
+## Descripción
+
+   Además de permitirte buscar por nombre de la película o serie, te permite buscar actores o miembros del casting, así como del equipo técnico que la produjo.
+
+   Te permite además marcar como favoritas aquellas producciones que más te han gustado y crear listas de estrenos por ver o de temas que se adapten a tu manera de disfrutar del cine y las series.
 
 ## Preparación para el ambiente de desarrollo
 
@@ -44,4 +52,14 @@
 
 ``` bash
         dart run flutter_native_splash:create
+```
+
+4. Generate Android AAB
+
+   Se genera el JKS (keystore certificate) y se copia en el folder /android/app
+
+   Luego se ejecuta este commando
+
+``` bash
+        flutter build appbundle
 ```
