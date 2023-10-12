@@ -52,7 +52,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
     final searchQuery = ref.watch(searchQueryProvider);
     final searchedMovies = ref.watch(searchedMoviesProvider);
 
-    final isDarkMode = ref.watch(darkModeProvider) == true;
+    final isDarkMode = ref.watch(darkModeProvider);
 
     return CustomScrollView(
       slivers: [

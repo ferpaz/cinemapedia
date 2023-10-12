@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:cinemafan/config/di/get_it.dart';
 import 'package:cinemafan/config/router/app_router.dart';
 import 'package:cinemafan/presentation/providers/providers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 Future<void> main() async {
@@ -17,7 +18,13 @@ Future<void> main() async {
   // Dependency Injection registers
   registerDependencies();
 
-  runApp(const ProviderScope(child: MainApp()));
+  // Cuando la aplicacion corre por primera vez, inicializa el darkmode de acuerdo a la configuracion del sistema
+  final prefs = await SharedPreferences.getInstance();
+  if (!prefs.containsKey('darkMode')) {
+    prefs.setBool('darkMode', PlatformDispatcher.instance.platformBrightness == Brightness.dark);
+  }
+
+  runApp(ProviderScope(child: MainApp()));
 }
 
 class MainApp extends ConsumerWidget {
@@ -36,7 +43,12 @@ class MainApp extends ConsumerWidget {
         useMaterial3: true,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      darkTheme: ThemeData.dark(),
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: ThemeData.dark().colorScheme.copyWith(
+          primary: Colors.purpleAccent,
+          secondary: Colors.deepPurpleAccent,
+        ),
+      ),
       themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
       routerConfig: appRouter,
     );
