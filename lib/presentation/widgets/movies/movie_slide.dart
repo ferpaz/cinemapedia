@@ -50,7 +50,7 @@ class MovieSlide extends StatelessWidget {
                         child: FadeIn(child: child),
                         onTap: () => context.push('/movie/${movie.id}')
                       )
-                    : SizedBox(height: 225, child: Center(child: CircularProgressIndicator(color: colors.primary, backgroundColor: colors.background,))),
+                    : SizedBox(height: 225, child: Center(child: CircularProgressIndicator(color: colors.primary, backgroundColor: colors.surface,))),
                 ),
               ),
             )

@@ -31,7 +31,7 @@ class MovieSlideShow extends StatelessWidget {
           margin: const EdgeInsets.only(top: 10),
           builder: DotSwiperPaginationBuilder(
             activeColor: colors.primary,
-            color: colors.onBackground.withOpacity(0.5),
+            color: colors.onSurface.withValues(alpha: 0.5),
             size: 8,
             activeSize: 12,
           ),
@@ -78,7 +78,7 @@ class _Slide extends StatelessWidget {
                 )
               : DecoratedBox(
                   decoration: decoration,
-                  child: Center(child: CircularProgressIndicator(color: colors.primary, backgroundColor: colors.background,))
+                  child: Center(child: CircularProgressIndicator(color: colors.primary, backgroundColor: colors.surface,))
               ),
           ),
         ),
